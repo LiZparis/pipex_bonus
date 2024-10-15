@@ -14,15 +14,19 @@ CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES_DIRS)
 SRCS_DIR        = ./sources/
 BONUS_SRCS_DIR  = ./bonus_sources/
 
-SRCS 			= $(addprefix $(SRCS_DIR), 	\
-				pipex.c  					\
-				free.c						\
-				find_executable.c			\
+SRCS 			= $(addprefix $(SRCS_DIR),			\
+				pipex.c  							\
+				free.c								\
+				find_executable.c					\
 				execute_command.c)
-# SRCS_BONUS = $(BONUS_SRCS_DIR)pipex_bonus.c
+SRCS_BONUS      = $(addprefix $(BONUS_SRCS_DIR), 	\
+				pipex_bonus.c  						\
+				free_bonus.c						\
+				find_executable_bonus.c				\
+				execute_command_bonus.c)
 
 OBJS = $(SRCS:.c=.o)
-# OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 REMOVE = rm -f
 
@@ -35,12 +39,12 @@ $(NAME): 		$(OBJS)
 				@echo "$(NAME): $(GREEN)$(NAME) was compiled.$(RESET)"
 				@echo
 
-# bonus: $(OBJS_BONUS)
-# 				$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
-#                 @echo "$(NAME_BONUS): $(GREEN)$(NAME_BONUS) was compiled with Bonus.$(RESET)"
-# 				@echo
+bonus:			$(OBJS_BONUS)
+				$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
+				@echo "$(NAME_BONUS): $(GREEN)$(NAME_BONUS) was compiled with Bonus.$(RESET)"
+				@echo
 
-%.o: %.c		../Include/pipex.h
+%.o: %.c		
 				$(CC) $(CFLAGS) -c $< -o $@   
 
 ${LIBFT}:
@@ -50,7 +54,7 @@ ${LIBFT}:
 clean:
 				make clean -C libraries/Libft
 				${REMOVE} $(OBJS) 
-				# ${REMOVE} $(OBJS_BONUS)
+				${REMOVE} $(OBJS_BONUS)
 				@echo "Cleaned object files."
 
 # 完全清理，包含删除可执行文件

@@ -1,1 +1,11 @@
-3
+Makefile
+bonus_sources
+bonus_sources_bon
+include
+input
+libraries
+output
+pipex
+pipex_bonus
+sources
+test.sh
